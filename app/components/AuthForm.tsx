@@ -7,6 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { Form } from "@/components/ui/form"
 
 const authFormSchema = (type: FormType) => {
     return z.object({
@@ -80,7 +81,7 @@ const AuthForm = ({ type } : { type: FormType }) => {
                         </Button>
 
                         <p className="text-center">
-                            {isSignin ? 'No aAccount yet?' : "Already have an Account ?" }
+                            {isSignin ? 'No Account yet? ' : "Already have an Account ? " }
 
                             <Link 
                                 className="text-user-primary ml-1 font-bold"
