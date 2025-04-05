@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Form } from "@/components/ui/form"
+import FormField from "./FormField"
 
 const authFormSchema = (type: FormType) => {
     return z.object({
@@ -67,9 +68,12 @@ const AuthForm = ({ type } : { type: FormType }) => {
                         className="space-y-8 w-full mt-4 form"
                     >
                         {!isSignin && 
-                            (
-                                <p>Name</p>
-                            )
+                            <FormField 
+                                control={form.control}
+                                name="name"
+                                label="Name"
+                                placeholder="Your name..."
+                            />
                         }
                         <p>Email</p>
                         <p>Password</p>
