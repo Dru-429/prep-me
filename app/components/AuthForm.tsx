@@ -6,36 +6,39 @@ import { z } from "zod"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+import { toast } from "sonner"
 
-const formSchema = z.object({
-    username: z.string().min(2).max(50),
-})
+const authFormSchema = (type: FormType) => {
+    return z.object({
+        name: type === "sign-in" ? z.string().optional() : z.string().min(3),
+        email: z.string().email(),
+        password: z.string().min(8),
+    })
+}
 
 const AuthForm = ({ type } : { type: FormType }) => {
+    const formSchema = authFormSchema(type)
 
-    // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
+            name: "",
+            email: "",
+            password: "",
         },
     })
 
-    // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+        try {
+            if (type === "sign-up") {
+                console.log("Sign up", values)
+            } else{
+                console.log("Sign in", values )
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(`There was an error ${error}`)
+        }
     }
 
     const isSignin = type === "sign-in"
