@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { dummyInterviews } from '@/constants'
+import InterviewCard from '../components/InterviewCard'
 
 const HomePage = () => {
   return (
@@ -39,10 +40,10 @@ const HomePage = () => {
         </h2>  
 
         <div className='interviews-section'>
-          <p> You haven&apos;t taken any interviews yet</p>
+          {/* <p> You haven&apos;t taken any interviews yet</p> */}
           {
-            dummyInterviews.map((interview) => (
-              <InterviewCard />
+            dummyInterviews.map((interview,index) => (
+              <InterviewCard {...interview } key={index} />
             ))
           }
         </div>
@@ -53,7 +54,12 @@ const HomePage = () => {
         <h2>Take an Interviews</h2>
 
         <div className='interviews-section'>
-          <p>There are no interviews available</p>
+          {/* <p>There are no interviews available</p> */}
+          {
+            dummyInterviews.map((interview,index) => (
+              <InterviewCard {...interview } key={index} />
+            ))
+          }
         </div>
       </section>
     </>
