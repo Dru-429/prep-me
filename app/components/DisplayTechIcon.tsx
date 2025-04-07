@@ -1,4 +1,4 @@
-import { cn, getTechLogos } from '@/lib/utils'
+import { getTechLogos } from '@/lib/utils'
 import React from 'react'
 import Image from 'next/image'
 
