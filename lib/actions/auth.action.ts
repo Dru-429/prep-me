@@ -41,7 +41,26 @@ export async function signUp(params: SignUpParams) {
 
 }
 
+export async function signIn(params: SignInParams) {
+    const { email, idTOken } = params
 
+    try {
+        const userRecord = await auth.getUserByEmail(email)
+
+        if(!userRecord) {
+            return {
+                success: false ,
+                message: "User does not exist. Create a now account instead"
+            }
+
+        }
+
+        await setSessionCookie(idTOken)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export async function setSessionCookie(idTOken: string) {
     const cookieStore = await cookies();
